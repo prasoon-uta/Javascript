@@ -1,0 +1,88 @@
+<html>
+<head>
+
+<script src="jquery.min.js"></script>
+
+</head>
+
+<body>
+<center>
+<table id="TableTest" >
+  <tr id="1">
+   <td ><input  type="text" value="TEST1"></td>
+     <td><input  type="text" value="TEST2"></td>
+     <td><input  type="text" value="TEST3"></td>
+  </tr>
+  <tr id="2">
+    <td><input  type="text" value="TEST4"></td>
+     <td><input type="text" value="TEST5"></td>
+     <td><input  type="text" value="TEST6"></td>
+  </tr>
+  <tr id="3">
+    <td><input type="text" value="TEST7"></td>
+     <td><input type="text" value="TEST8"></td>
+     <td><input type="text" value="TEST9"></td>
+  </tr>
+  
+  
+</table>
+</center>
+</body>
+
+<script>
+
+var oldName='';
+var oldDes='';
+var oldDate='';
+var rowid='';
+var test='';
+
+
+
+$( document ).ready(function() {
+    
+	$('#TableTest').on('focusin','tr', function(event) {
+    	  
+	if(oldName=='' && oldDes=='' && oldDate=='')
+	{	
+	oldName=$(this).closest('tr').find('td:eq(0) input').val();
+	oldDes=$(this).closest('tr').find('td:eq(1) input').val();
+	oldDate=$(this).closest('tr').find('td:eq(2) input').val();
+	}
+		
+	if(rowid=='' && test=='')
+	{
+		rowid=$(this).closest('tr').prop('id');
+		test=$(this).closest('tr');
+	}
+		
+	var newName=test.find('td:eq(0) input').val();
+		
+	if( rowid!='' && rowid!=$(this).closest('tr').prop('id'))
+	{
+		
+		
+		console.log(oldName);
+		console.log(newName);
+					
+		rowid=$(this).closest('tr').prop('id');
+		oldName=$(this).closest('tr').find('td:eq(0) input').val();
+		test=$(this).closest('tr');
+		
+		
+	}
+	
+        // something
+    });
+	
+	
+	
+});
+
+</script>
+
+
+
+
+
+</html>

@@ -24,8 +24,15 @@
      <td><input type="text" value="TEST9"></td>
   </tr>
   
-  
+	<tr id="0">
+    <td><input type="text" ></td>
+     <td><input type="text" ></td>
+     <td><input type="text" ></td>
+  </tr>
+	
 </table>
+<div tabindex="0"></div>
+
 </center>
 </body>
 
@@ -36,8 +43,6 @@ var oldDes='';
 var oldDate='';
 var rowid='';
 var test='';
-
-
 
 $( document ).ready(function() {
     
@@ -57,32 +62,33 @@ $( document ).ready(function() {
 	}
 		
 	var newName=test.find('td:eq(0) input').val();
-		
+	var newDes=test.find('td:eq(1) input').val();
+	var newDate=test.find('td:eq(2) input').val();
+	
 	if( rowid!='' && rowid!=$(this).closest('tr').prop('id'))
 	{
 		
-		
 		console.log(oldName);
+		console.log(oldDes);
+		console.log(oldDate);
+		
 		console.log(newName);
-					
+		console.log(newDes);
+		console.log(newDate);
+						
 		rowid=$(this).closest('tr').prop('id');
 		oldName=$(this).closest('tr').find('td:eq(0) input').val();
+		oldDes=$(this).closest('tr').find('td:eq(1) input').val();
+		oldDate=$(this).closest('tr').find('td:eq(2) input').val();
+		
 		test=$(this).closest('tr');
-		
-		
+				
 	}
-	
-        // something
+	        
     });
-	
-	
-	
+		
 });
 
 </script>
-
-
-
-
 
 </html>

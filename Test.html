@@ -2,6 +2,7 @@
 <head>
 
 <script src="jquery.min.js"></script>
+<script src="parsley.js"></script>
 
 </head>
 
@@ -9,37 +10,42 @@
 <center>
 <table id="TableTest" >
   <tr id="1">
-   <td ><input  type="text" value="TEST1"></td>
-     <td><input  type="text" value="TEST2"></td>
-     <td><input  type="text" value="TEST3"></td>
+   <td ><input  type="text" data-parsley-required="true" data_trigger="change" value="TEST1"></td>
+     <td><input  type="text" data-parsley-required="true" data_trigger="change"  value="TEST2"></td>
+     <td><input  type="text" data-parsley-required="true" data_trigger="change"  value="TEST3"></td>
+	
+	 <td><select required="">
+	 <option value="">---</option>
+	 <option value="volvo">Volvo</option>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="mercedes">Mercedes</option>
+  <option value="audi">Audi</option>
+</select></td>
+  
+  
   </tr>
   <tr id="2">
-    <td><input  type="text" value="TEST4"></td>
-     <td><input type="text" value="TEST5"></td>
-     <td><input  type="text" value="TEST6"></td>
+    <td><input  type="text" data-parsley-required="true" data_trigger="change"  value="TEST4"></td>
+     <td><input type="text" data-parsley-required="true" data_trigger="change"  value="TEST5"></td>
+     <td><input  type="text" data-parsley-required="true" data_trigger="change"  value="TEST6"></td>
   </tr>
   <tr id="3">
-    <td><input type="text" value="TEST7"></td>
-     <td><input type="text" value="TEST8"></td>
-     <td><input type="text" value="TEST9"></td>
+    <td><input type="text" data-parsley-required="true" data_trigger="change" value="TEST7"></td>
+     <td><input type="text" data-parsley-required="true" data_trigger="change"  value="TEST8"></td>
+     <td><input type="text" data-parsley-required="true" data_trigger="change"  value="TEST9"></td>
   </tr>
-  
-	<tr id="0">
+  <tr id="0" hasfocus: isNew>
     <td><input type="text" ></td>
      <td><input type="text" ></td>
      <td><input type="text" ></td>
   </tr>
-	
-	
-	  <tr id="-1">
+   <tr id="-1">
                 <td><div style="width: 0;overflow: hidden;"><input type="text" style="opacity:0" /></div></td>
                 <td><div style="width: 0;overflow: hidden;"><input type="text" style="opacity:0" /></div></td>
             </tr>
-			
-			
+  
 </table>
-
-
 </center>
 </body>
 
@@ -50,6 +56,8 @@ var oldDes='';
 var oldDate='';
 var rowid='';
 var test='';
+
+
 
 $( document ).ready(function() {
     
@@ -68,15 +76,33 @@ $( document ).ready(function() {
 		test=$(this).closest('tr');
 	}
 		
-	var newName=test.find('td:eq(0) input').val();
-	var newDes=test.find('td:eq(1) input').val();
-	var newDate=test.find('td:eq(2) input').val();
-	
-	if( rowid!=$(this).closest('tr').prop('id'))
-	{
+		var index=0;
+		var isValid=true;
+		test.find('td').each (function() {
+		test.find(':input').eq(index).parsley().validate();
+		isValid=test.find(':input').eq(index).parsley().isValid();
+		if(!isValid)
+		return isValid;
+		index++;		
+		});    
 		
+		console.log(isValid);
+		
+		test.find('input').eq(0).parsley().validate();
+		test.closest('tr').find('input').eq(1).parsley().validate();
+		test.closest('tr').find('input').eq(2).parsley().validate();
+		
+		
+		
+	if(rowid!=$(this).closest('tr').prop('id'))
+	{
+									
+									
+									
+									
 									$('#-1').remove();
 								
+									
 									
 									var newRow = '<tr id="0">' +
                                     '<td><input type="text"></td>' +
@@ -88,26 +114,32 @@ $( document ).ready(function() {
                                     '<td><div style="width: 0;overflow: hidden;"><input type="text" style="opacity:0"  /></div></td>' +
                                     '<td><div style="width: 0;overflow: hidden;"><input type="text" style="opacity:0"  /></div></td>';
                                 
-                                $("#TableTest").append(newRow);
+                                $("#TableTest").append(newRow).focus();;
 								
-                                $("#TableTest").append(newRow1);						
+                               
+                              $("#TableTest").append(newRow1);	
 								
-								
-		rowid=$(this).closest('tr').prop('id');
-		oldName=$(this).closest('tr').find('td:eq(0) input').val();
-		oldDes=$(this).closest('tr').find('td:eq(1) input').val();
-		oldDate=$(this).closest('tr').find('td:eq(2) input').val();
+					
 		
-		test=$(this).closest('tr');
-		
-
 		
 	}
-	        
-    });
+		rowid=$(this).closest('tr').prop('id');
+		oldName=$(this).closest('tr').find('td:eq(0) input').val();
+		test=$(this).closest('tr');
 		
+        // something
+    });
+	
+	 
+	
 });
 
+
+
 </script>
+
+
+
+
 
 </html>

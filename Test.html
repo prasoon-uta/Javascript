@@ -30,8 +30,15 @@
      <td><input type="text" ></td>
   </tr>
 	
+	
+	  <tr id="-1">
+                <td><div style="width: 0;overflow: hidden;"><input type="text" style="opacity:0" /></div></td>
+                <td><div style="width: 0;overflow: hidden;"><input type="text" style="opacity:0" /></div></td>
+            </tr>
+			
+			
 </table>
-<div tabindex="0"></div>
+
 
 </center>
 </body>
@@ -65,24 +72,36 @@ $( document ).ready(function() {
 	var newDes=test.find('td:eq(1) input').val();
 	var newDate=test.find('td:eq(2) input').val();
 	
-	if( rowid!='' && rowid!=$(this).closest('tr').prop('id'))
+	if( rowid!=$(this).closest('tr').prop('id'))
 	{
 		
-		console.log(oldName);
-		console.log(oldDes);
-		console.log(oldDate);
-		
-		console.log(newName);
-		console.log(newDes);
-		console.log(newDate);
-						
+									$('#-1').remove();
+								
+									
+									var newRow = '<tr id="0">' +
+                                    '<td><input type="text"></td>' +
+                                    '<td><input type="text"/></td>'+ 
+									'<td><input type="text"/></td>';
+                                    
+                                
+                                var newRow1 = '<tr id="-1">' +
+                                    '<td><div style="width: 0;overflow: hidden;"><input type="text" style="opacity:0"  /></div></td>' +
+                                    '<td><div style="width: 0;overflow: hidden;"><input type="text" style="opacity:0"  /></div></td>';
+                                
+                                $("#TableTest").append(newRow);
+								
+                                $("#TableTest").append(newRow1);						
+								
+								
 		rowid=$(this).closest('tr').prop('id');
 		oldName=$(this).closest('tr').find('td:eq(0) input').val();
 		oldDes=$(this).closest('tr').find('td:eq(1) input').val();
 		oldDate=$(this).closest('tr').find('td:eq(2) input').val();
 		
 		test=$(this).closest('tr');
-				
+		
+
+		
 	}
 	        
     });
